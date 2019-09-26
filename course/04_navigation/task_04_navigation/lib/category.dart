@@ -47,7 +47,11 @@ class Category extends StatelessWidget {
 
   /// Navigates to the [ConverterRoute].
   void _navigateToConverter(BuildContext context) {
-    // TODO: Using the Navigator, navigate to the [ConverterRoute]
+    // Using the Navigator, navigate to the [ConverterRoute]
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ConverterRoute(categoryName: name, units: units, categoryColor: color))
+    );
   }
 
   /// Builds a custom widget that shows [Category] information.
@@ -69,9 +73,9 @@ class Category extends StatelessWidget {
           splashColor: color,
           // We can use either the () => function() or the () { function(); }
           // syntax.
-          // TODO: Update this onTap property to call _navigateToConverter()
           onTap: () {
-            print('I was tapped!');
+            //navigate to the converter route
+            _navigateToConverter(context);
           },
           child: Padding(
             padding: EdgeInsets.all(8.0),

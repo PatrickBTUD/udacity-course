@@ -16,21 +16,42 @@ import 'package:task_04_navigation/unit.dart';
 class ConverterRoute extends StatelessWidget {
   /// Units for this [Category].
   final List<Unit> units;
+  final String categoryName;
+  final Color categoryColor;
 
   /// This [ConverterRoute] requires the color and units to not be null.
-  // TODO: Pass in the [Category]'s color
+  // Pass in the [Category]'s color
   const ConverterRoute({
+    @required this.categoryName,
     @required this.units,
-  }) : assert(units != null);
+    @required this.categoryColor,
+  }) : assert(categoryName != null),
+    assert(units != null),
+    assert(categoryColor != null);
 
   @override
   Widget build(BuildContext context) {
+    //init the AppBar with same color as category and name
+    final appBar = AppBar(
+      elevation: 0.0,
+      title: Text(
+        categoryName,
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 30.0,
+        ),
+      ),
+      centerTitle: true,
+      backgroundColor: categoryColor,
+    );
+
     // Here is just a placeholder for a list of mock units
     final unitWidgets = units.map((Unit unit) {
-      // TODO: Set the color for this Container
       return Container(
         margin: EdgeInsets.all(8.0),
         padding: EdgeInsets.all(16.0),
+        // Set the color for this Container according to the category
+        color: categoryColor,
         child: Column(
           children: <Widget>[
             Text(
@@ -46,8 +67,12 @@ class ConverterRoute extends StatelessWidget {
       );
     }).toList();
 
-    return ListView(
-      children: unitWidgets,
+    //create a Scaffold widget with the Appbar at the top and list of units
+    return Scaffold(
+      appBar: appBar,
+      body: ListView(
+        children: unitWidgets
+      ),
     );
   }
 }
