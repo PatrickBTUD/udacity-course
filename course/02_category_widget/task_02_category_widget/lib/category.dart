@@ -10,13 +10,25 @@ import 'package:flutter/material.dart';
 ///
 /// The widget is composed on an [Icon] and [Text]. Tapping on the widget shows
 /// a colored [InkWell] animation.
+
+//final properties for the height and border radius
+final _categroyHeight = 100.0;
+final _borderRadius = BorderRadius.circular(_categroyHeight / 2);
+
 class Category extends StatelessWidget {
   /// Creates a [Category].
   ///
   /// A [Category] saves the name of the Category (e.g. 'Length'), its color for
   /// the UI, and the icon that represents it (e.g. a ruler).
-  // TODO: You'll need the name, color, and iconLocation from main.dart
-  const Category();
+  final String name;
+  final ColorSwatch color;
+  final IconData iconLocation;
+
+  const Category(
+      {@required this.name, @required this.color, @required this.iconLocation})
+      : assert(name != null),
+        assert(color != null),
+        assert(iconLocation != null);
 
   /// Builds a custom widget that shows [Category] information.
   ///
@@ -27,7 +39,38 @@ class Category extends StatelessWidget {
   // Theme ancestor in the tree. Below, we obtain the display1 text theme.
   // See https://docs.flutter.io/flutter/material/Theme-class.html
   Widget build(BuildContext context) {
-    // TODO: Build the custom widget here, referring to the Specs.
-    return Container();
+    return Container(
+      height: _categroyHeight,
+      child: InkWell(
+        splashColor: color,
+        borderRadius: _borderRadius,
+        onTap: () {
+          print("Inkwell tapped");
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  width: 70.0,
+                  child: Icon(
+                    iconLocation,
+                    size: 60.0,
+                  ),
+                ),
+              ),
+              Center(
+                  child: Text(
+                name,
+                style: TextStyle(fontSize: 24.0),
+              ))
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
