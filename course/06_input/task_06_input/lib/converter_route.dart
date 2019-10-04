@@ -61,36 +61,61 @@ class _ConverterRouteState extends State<ConverterRoute> {
     // TODO: Create the 'input' group of widgets. This is a Column that
     // includes the input value, and 'from' unit [Dropdown].
 
-    // TODO: Create a compare arrows icon.
+    final input = Padding(
+      padding: _padding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          TextField(
+            decoration: InputDecoration(
+              labelText: 'Input',
+
+            ),
+            //only allow numbers as input values -> show number keyboard
+            keyboardType: TextInputType.number,
+          )
+        ],
+      ),
+    );
+
+    // Create a compare arrows icon.
+    final arrowIcon = Icon(
+      Icons.compare_arrows,
+      size: 40.0,
+    );
 
     // TODO: Create the 'output' group of widgets. This is a Column that
     // includes the output value, and 'to' unit [Dropdown].
 
+    final output = Padding(
+      padding: _padding,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          TextField(
+            decoration: InputDecoration(
+              labelText: 'Output'
+            ),
+
+          )
+        ],
+      )
+    );
+
     // TODO: Return the input, arrows, and output widgets, wrapped in a Column.
 
-    // TODO: Delete the below placeholder code.
-    final unitWidgets = widget.units.map((Unit unit) {
-      return Container(
-        color: widget.color,
-        margin: EdgeInsets.all(8.0),
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              unit.name,
-              style: Theme.of(context).textTheme.headline,
-            ),
-            Text(
-              'Conversion: ${unit.conversion}',
-              style: Theme.of(context).textTheme.subhead,
-            ),
-          ],
-        ),
-      );
-    }).toList();
+    final layout = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        input,
+        arrowIcon,
+        output,
+      ],
+    );
 
-    return ListView(
-      children: unitWidgets,
+    return Padding(
+      padding: _padding,
+      child: layout,
     );
   }
 }
